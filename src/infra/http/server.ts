@@ -53,8 +53,6 @@ server.register(uploadImageRoute);
 server.register(getUploadsRoute);
 server.register(exportUploadsRoute);
 
-console.log(env.DATABASE_URL);
-
 server.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
   console.log('HTTP Server running!');
 });

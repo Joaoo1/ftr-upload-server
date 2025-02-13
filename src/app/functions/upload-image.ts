@@ -39,5 +39,5 @@ export async function uploadImage(
     remoteUrl: url,
   });
 
-  return makeRight({ url: '' });
+  return makeRight({ url });
 }
