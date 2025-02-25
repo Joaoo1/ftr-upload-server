@@ -1,11 +1,26 @@
 services:
   pg:
     image: bitnami/postgresql:latest
+    container_name: ftr-upload-server-db
+    restart: unless-stopped
     ports:
       - '5432:5432'
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=upload_test
+    env_file:
+      - .env
     volumes:
       - './docker:/docker-entrypoint-initdb.d'
+      - 'db:/bitnami/postgresql'
+
+  app:
+    build: .
+    restart: unless-stopped
+    container_name: ftr-upload-server-api
+    ports:
+      - '3000:3333'
+    depends_on:
+      - pg
+    env_file:
+      - .env
+
+volumes:
+  db:
